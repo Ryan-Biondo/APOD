@@ -23,7 +23,7 @@ const formatDate = (date: Date): string =>
 
 const useApod = () => {
   const endDate = new Date();
-  const startDate = new Date(endDate.getTime() - (8 * 24 * 60 * 60 * 1000)); // 8 days ago in milliseconds
+  const startDate = new Date(endDate.getTime() - (19 * 24 * 60 * 60 * 1000)); // 8 days ago in milliseconds
 
   const url = `apod?api_key=${API_KEY}&start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}`; 
   

@@ -27,7 +27,7 @@ const LandingCard = ({ imageUrl, title, date }: CardProps) => {
             width="100%"
             borderTopRadius="lg"
           />
-          <Box my={2} ml={4}>
+          <Box my={2} px={3}>
             <Text fontWeight="semibold" fontSize="lg">
               {title}
             </Text>

@@ -1,7 +1,11 @@
+import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-import apiClient from '../services/api-client';
-import { API_KEY } from '../services/api-client';
+import apiClient, { API_KEY } from '../services/api-client';
 import { ApodItem } from '../hooks/useApod';
+
+function isAxiosError(error: unknown): error is AxiosError {
+    return (error as AxiosError).response !== undefined;
+}
 
 const useApodForDate = (date: string) => {
   const [apodItem, setApodItem] = useState<ApodItem | null>(null);
@@ -11,13 +15,20 @@ const useApodForDate = (date: string) => {
   useEffect(() => {
     const fetchApodForDate = async () => {
       try {
-        const response = await apiClient.get<ApodItem>(
-          `apod?api_key=${API_KEY}&date=${date}`
-        );
+        const response = await axios.get<ApodItem>(`${apiClient.defaults.baseURL}apod`, {
+          params: {
+            api_key: API_KEY,
+            date: date
+          }
+        });
         setApodItem(response.data);
         setIsLoading(false);
       } catch (err) {
-        setError((err as Error).message);
+        if (isAxiosError(err)) {
+            setError( err.message );
+        } else {
+            setError('An error occurred');
+        }
         setIsLoading(false);
       }
     };
