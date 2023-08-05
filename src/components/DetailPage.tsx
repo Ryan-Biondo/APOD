@@ -4,7 +4,12 @@ import NavBar from './NavBar';
 import useApodForDate from '../hooks/useApodForDate';
 import { Box } from '@chakra-ui/react';
 
-const DetailsPage = () => {
+interface DetailProps {
+  startDate: Date | null;
+  setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+}
+
+const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
   const { date } = useParams<{ date: string }>();
 
   if (!date) return <p>Date not provided!</p>;
@@ -15,7 +20,7 @@ const DetailsPage = () => {
 
   return (
     <Box maxW="900px" mx="auto">
-      <NavBar />
+      <NavBar startDate={startDate} setStartDate={setStartDate} />
       <PictureCard
         title={apodItem!.title}
         imageUrl={apodItem!.url}

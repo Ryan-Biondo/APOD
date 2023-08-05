@@ -10,18 +10,20 @@ const useDateNavigation = () => {
   const isAtStartDate = date === earliestDate;
   const isAtEndDate = date === today;
 
-  const navigateToPreviousDate = () => {
-    if (isAtStartDate) return;
+  const navigateToPreviousDate = (): Date | null => {
+    if (isAtStartDate) return null;
     const prevDate = new Date(date!);
     prevDate.setDate(prevDate.getDate() - 1);
     navigate(`/details/${prevDate.toISOString().split('T')[0]}`);
+    return prevDate;
   };
 
-  const navigateToNextDate = () => {
-    if (isAtEndDate) return;
+  const navigateToNextDate = (): Date | null => {
+    if (isAtEndDate) return null;
     const nextDate = new Date(date!);
     nextDate.setDate(nextDate.getDate() + 1);
     navigate(`/details/${nextDate.toISOString().split('T')[0]}`);
+    return nextDate;
   };
 
   return {

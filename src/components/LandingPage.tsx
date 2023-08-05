@@ -9,10 +9,23 @@ import {
 import LandingCard from './LandingCard';
 import useApod from '../hooks/useApod';
 import ThemeToggleButton from './ThemeToggleButton';
+import Calendar from './Calendar';
+import { useNavigate } from 'react-router-dom';
 
-const LandingPage = () => {
+interface LandingPageProps {
+  startDate: Date | null;
+  setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+}
+
+const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
   const { data, error, isLoading } = useApod();
   const { colorMode } = useColorMode();
+  const navigate = useNavigate();
+
+  const handleDateClick = (selectedDate: Date) => {
+    setStartDate(selectedDate); // Set the shared state
+    navigate(`/details/${selectedDate.toISOString().split('T')[0]}`); // Navigate to details page
+  };
 
   const gridTemplateColumns = useBreakpointValue({
     base: '1fr',
@@ -50,6 +63,7 @@ const LandingPage = () => {
           Astronomy Picture of the Day Gallery
         </Heading>
         <ThemeToggleButton />
+        <Calendar startDate={startDate} setStartDate={setStartDate} />
       </VStack>
       <Grid templateColumns={gridTemplateColumns} gap={6}>
         {reversedData.map((item) => (
@@ -58,6 +72,7 @@ const LandingPage = () => {
             date={item.date}
             imageUrl={item.url}
             title={item.title}
+            onClick={() => handleDateClick(new Date(item.date))}
           />
         ))}
       </Grid>

@@ -12,11 +12,12 @@ interface CardProps {
   imageUrl: string;
   title: string;
   date?: string;
+  onClick?: () => void;
 }
 
-const LandingCard = ({ imageUrl, title, date }: CardProps) => {
+const LandingCard = ({ imageUrl, title, date, onClick }: CardProps) => {
   return (
-    <ChakraLink as={Link} to={`/details/${date}`}>
+    <ChakraLink as={Link} to={`/details/${date}`} onClick={onClick}>
       <Card h="fit-content" borderRadius="lg" boxShadow="lg">
         <CardBody padding={0}>
           <Image

@@ -5,9 +5,11 @@ import { Box, ChakraProvider, useColorMode } from '@chakra-ui/react';
 import StarryNight from './components/StarryNight';
 import './App.css';
 import theme from './theme';
+import { useState } from 'react';
 
 const App = () => {
   const { colorMode } = useColorMode();
+  const [startDate, setStartDate] = useState<Date | null>(new Date()); // Establish the state here
 
   return (
     <ChakraProvider theme={theme}>
@@ -16,8 +18,24 @@ const App = () => {
         <Box padding={5} bg={theme.colors.background[colorMode]}>
           <Router>
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/details/:date" element={<DetailPage />} />
+              <Route
+                path="/"
+                element={
+                  <LandingPage
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                  />
+                }
+              />
+              <Route
+                path="/details/:date"
+                element={
+                  <DetailPage
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                  />
+                }
+              />
             </Routes>
           </Router>
         </Box>
