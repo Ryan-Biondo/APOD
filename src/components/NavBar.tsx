@@ -1,4 +1,4 @@
-import { Button, HStack } from '@chakra-ui/react';
+import { Button, HStack, theme, useColorMode } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import ThemeToggleButton from './ThemeToggleButton';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
@@ -11,12 +11,32 @@ const NavBar = () => {
     isAtStartDate,
     isAtEndDate,
   } = useDateNavigation();
+  const { colorMode } = useColorMode();
 
   return (
     <>
       <HStack justifyContent={'space-between'} mb={3}>
         <Link to="/">
-          <Button colorScheme="blue">Home</Button>
+          <Button
+            borderWidth={1}
+            bg={
+              colorMode === 'dark'
+                ? theme.colors.gray[900]
+                : theme.colors.gray[100]
+            }
+            color={
+              colorMode === 'dark'
+                ? theme.colors.gray[100]
+                : theme.colors.gray[900]
+            }
+            _hover={{
+              bg:
+                colorMode === 'dark'
+                  ? theme.colors.gray[800]
+                  : theme.colors.gray[200],
+            }}>
+            Home
+          </Button>
         </Link>
         <ThemeToggleButton />
       </HStack>
@@ -24,15 +44,15 @@ const NavBar = () => {
         <Button
           onClick={navigateToPreviousDate}
           leftIcon={<ChevronLeftIcon />}
-          variant="outline"
-          isDisabled={isAtStartDate}>
+          isDisabled={isAtStartDate}
+          colorScheme="blue">
           Previous
         </Button>
         <Button
           onClick={navigateToNextDate}
           rightIcon={<ChevronRightIcon />}
-          variant="outline"
-          isDisabled={isAtEndDate}>
+          isDisabled={isAtEndDate}
+          colorScheme="blue">
           Next
         </Button>
       </HStack>

@@ -1,10 +1,18 @@
-import { Grid, Heading, VStack, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Grid,
+  Heading,
+  VStack,
+  theme,
+  useBreakpointValue,
+  useColorMode,
+} from '@chakra-ui/react';
 import LandingCard from './LandingCard';
 import useApod from '../hooks/useApod';
 import ThemeToggleButton from './ThemeToggleButton';
 
 const LandingPage = () => {
   const { data, error, isLoading } = useApod();
+  const { colorMode } = useColorMode();
 
   const gridTemplateColumns = useBreakpointValue({
     base: '1fr',
@@ -20,7 +28,27 @@ const LandingPage = () => {
   return (
     <>
       <VStack spacing={4} alignItems="start" mb="6">
-        <Heading>Astronomy Picture of the Day Gallery</Heading>
+        <Heading
+          p={2}
+          borderRadius={'lg'}
+          bg={
+            colorMode === 'dark'
+              ? theme.colors.gray[900]
+              : theme.colors.gray[100]
+          }
+          color={
+            colorMode === 'dark'
+              ? theme.colors.gray[100]
+              : theme.colors.gray[900]
+          }
+          _hover={{
+            bg:
+              colorMode === 'dark'
+                ? theme.colors.gray[800]
+                : theme.colors.gray[200],
+          }}>
+          Astronomy Picture of the Day Gallery
+        </Heading>
         <ThemeToggleButton />
       </VStack>
       <Grid templateColumns={gridTemplateColumns} gap={6}>
