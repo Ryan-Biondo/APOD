@@ -1,5 +1,6 @@
 import { Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import ThemeToggleButton from './ThemeToggleButton';
 
 const NavBar = () => {
   return (
@@ -9,6 +10,7 @@ const NavBar = () => {
           Home
         </Button>
       </Link>
+      <ThemeToggleButton />
     </nav>
   );
 };
