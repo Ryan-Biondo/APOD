@@ -1,27 +1,48 @@
-import useApod from '../hooks/useApod';
+import { Box, Image, Text } from '@chakra-ui/react';
 
-const PictureCard = () => {
-  const { data, error, isLoading } = useApod();
+interface PictureCardProps {
+  title: string;
+  imageUrl: string;
+  date: string;
+  explanation: string;
+  hdUrl?: string;
+  copyright?: string;
+}
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+const PictureCard = (props: PictureCardProps) => {
+  const { title, imageUrl, date, explanation, hdUrl, copyright } = props;
 
-  if (data) {
-    return (
-      <div>
-        {data.map((item) => (
-          <div key={item.date}>
-            <h2>{item.title}</h2>
-            <img src={item.url} alt={item.title} />
-            <p>{item.explanation}</p>
-            {item.copyright && <p>Copyright: {item.copyright}</p>}
-          </div>
-        ))}
-      </div>
-    );
-  } else {
-    return <p>No data to display.</p>;
-  }
+  return (
+    <Box
+      maxW="full"
+      borderWidth="1px"
+      borderRadius="lg"
+      p="6"
+      overflow="hidden">
+      <Image src={imageUrl} alt={title} width="full" />
+      <Box mt="4">
+        <Text fontWeight="bold" fontSize="2xl" mb="2">
+          {title}
+        </Text>
+        <Text fontSize="sm" mb="2">
+          Date: {date}
+        </Text>
+        <Text>{explanation}</Text>
+        {hdUrl && (
+          <Box mt="4">
+            <Text as="a" href={hdUrl} target="_blank" rel="noopener noreferrer">
+              View in HD
+            </Text>
+          </Box>
+        )}
+        {copyright && (
+          <Box mt="2" fontSize="xs" color="gray.500">
+            Copyright: {copyright}
+          </Box>
+        )}
+      </Box>
+    </Box>
+  );
 };
 
 export default PictureCard;
