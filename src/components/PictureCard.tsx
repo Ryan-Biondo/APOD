@@ -1,21 +1,27 @@
 import useApod from '../hooks/useApod';
 
 const PictureCard = () => {
-  const { data: apod, error, isLoading } = useApod();
+  const { data, error, isLoading } = useApod();
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong: {error.message}</p>;
+  if (error) return <p>Error: {error}</p>;
 
-  return apod ? (
-    <div>
-      <h2>{apod.title}</h2>
-      <img src={apod.url} alt={apod.title} />
-      <p>{apod.explanation}</p>
-      {apod.copyright && <p>Copyright: {apod.copyright}</p>}
-    </div>
-  ) : (
-    <p>No data to display.</p>
-  );
+  if (data) {
+    return (
+      <div>
+        {data.map((item) => (
+          <div key={item.date}>
+            <h2>{item.title}</h2>
+            <img src={item.url} alt={item.title} />
+            <p>{item.explanation}</p>
+            {item.copyright && <p>Copyright: {item.copyright}</p>}
+          </div>
+        ))}
+      </div>
+    );
+  } else {
+    return <p>No data to display.</p>;
+  }
 };
 
 export default PictureCard;

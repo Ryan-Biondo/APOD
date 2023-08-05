@@ -1,27 +1,33 @@
 import { useEffect, useState } from 'react';
+import { AxiosRequestConfig, CanceledError } from 'axios';
 import apiClient from '../services/api-client';
 
-const useData = <T>(url: string) => {
-  const [data, setData] = useState<T | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?: any[]) => {
+    const [data, setData] = useState<T[]>([]);
+    const [error, setError] = useState(null);
+    const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await apiClient.get<T>(url);
-        setData(response.data);
-        setIsLoading(false);
-      } catch (err) {
-        setError(new Error((err as Error).message || "An unknown error occurred"));
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [url]);
+    useEffect(() => {
+      const controller = new AbortController();
 
-  return { data, isLoading, error };
-};
+      setLoading(true);
+      apiClient
+        .get<T[]>(endpoint, { signal: controller.signal, ...requestConfig })
+        .then((res) => {
+            setData(res.data);
+            setLoading(false);
+        })
+        .catch((err) => {
+            if (err instanceof CanceledError) return;
+            setError(err.message);
+            setLoading(false);
+        });
+
+        return () => controller.abort();
+    }, deps ? [...deps] : []);
+
+    return { data, error, isLoading };
+}
+
 
 export default useData;
