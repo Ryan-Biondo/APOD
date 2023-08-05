@@ -1,12 +1,18 @@
-import './App.css';
-import PictureCard from './components/PictureCard';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import DetailPage from './components/DetailPage';
+import NavBar from './components/NavBar';
 
-function App() {
+const App = () => {
   return (
-    <>
-      <PictureCard />
-    </>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/detail" element={<DetailPage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
