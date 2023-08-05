@@ -1,4 +1,4 @@
-import { Grid } from '@chakra-ui/react';
+import { Grid, Heading, VStack, useBreakpointValue } from '@chakra-ui/react';
 import LandingCard from './LandingCard';
 import useApod from '../hooks/useApod';
 import ThemeToggleButton from './ThemeToggleButton';
@@ -6,14 +6,24 @@ import ThemeToggleButton from './ThemeToggleButton';
 const LandingPage = () => {
   const { data, error, isLoading } = useApod();
 
+  const gridTemplateColumns = useBreakpointValue({
+    base: '1fr',
+    md: 'repeat(2, 1fr)',
+    lg: 'repeat(3, 1fr)',
+  });
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
+  const reversedData = [...data].reverse();
 
   return (
     <>
-      <ThemeToggleButton />
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-        {data.map((item) => (
+      <VStack spacing={4} alignItems="start" mb="6">
+        <Heading>Astronomy Picture of the Day Gallery</Heading>
+        <ThemeToggleButton />
+      </VStack>
+      <Grid templateColumns={gridTemplateColumns} gap={6}>
+        {reversedData.map((item) => (
           <LandingCard
             key={item.date}
             date={item.date}

@@ -13,13 +13,7 @@ const PictureCard = (props: PictureCardProps) => {
   const { title, imageUrl, date, explanation, hdUrl, copyright } = props;
 
   return (
-    <Box
-      maxW="full"
-      borderWidth="1px"
-      borderRadius="lg"
-      p="6"
-      overflow="hidden">
-      <Image src={imageUrl} alt={title} width="full" />
+    <Box maxW="full" overflow="hidden">
       <Box mt="4">
         <Text fontWeight="bold" fontSize="2xl" mb="2">
           {title}
@@ -28,6 +22,16 @@ const PictureCard = (props: PictureCardProps) => {
           Date: {date}
         </Text>
         <Text>{explanation}</Text>
+
+        <Image
+          src={imageUrl}
+          alt={title}
+          height="700px"
+          objectFit="cover"
+          borderRadius="sm"
+          mt="4"
+          mx="auto"
+        />
         {hdUrl && (
           <Box mt="4">
             <Text as="a" href={hdUrl} target="_blank" rel="noopener noreferrer">
