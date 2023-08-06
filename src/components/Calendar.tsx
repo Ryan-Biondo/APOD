@@ -17,14 +17,14 @@ const Calendar = ({ startDate, setStartDate }: CalendarProps) => {
   return (
     <HStack
       bg={
-        colorMode === 'dark' ? theme.colors.gray[700] : theme.colors.gray[100]
+        colorMode === 'dark' ? theme.colors.gray[900] : theme.colors.gray[100]
       }
       color={
         colorMode === 'dark' ? theme.colors.gray[100] : theme.colors.gray[900]
       }
       p={2}
       borderRadius={'lg'}>
-      <Text>Choose a Date:</Text>
+      <Text>Date:</Text>
       <Box borderWidth={1}>
         <DatePicker
           selected={startDate}

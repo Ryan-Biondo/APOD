@@ -1,4 +1,4 @@
-import { Button, HStack, useColorMode, useTheme } from '@chakra-ui/react';
+import { Button, Flex, HStack, useColorMode, useTheme } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import ThemeToggleButton from './ThemeToggleButton';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
@@ -64,23 +64,30 @@ const NavBar = ({ startDate, setStartDate }: NavProps) => {
         </Link>
         <ThemeToggleButton />
       </HStack>
-      <HStack justifyContent={'space-between'}>
-        <Button
-          onClick={handlePreviousClick}
-          leftIcon={<ChevronLeftIcon />}
-          isDisabled={isAtStartDate}
-          colorScheme="blue">
-          Previous
-        </Button>
+
+      <Flex
+        direction={['column', 'column', 'row']} // Switch direction based on breakpoints
+        justifyContent={'space-between'}
+        alignItems={['start', 'start', 'center']} // Adjust alignment for column layout
+        gap={3}>
+        <HStack spacing={3}>
+          <Button
+            onClick={handlePreviousClick}
+            leftIcon={<ChevronLeftIcon />}
+            isDisabled={isAtStartDate}
+            colorScheme="blue">
+            Previous
+          </Button>
+          <Button
+            onClick={handleNextClick}
+            rightIcon={<ChevronRightIcon />}
+            isDisabled={isAtEndDate}
+            colorScheme="blue">
+            Next
+          </Button>
+        </HStack>
         <Calendar startDate={startDate} setStartDate={setStartDate} />
-        <Button
-          onClick={handleNextClick}
-          rightIcon={<ChevronRightIcon />}
-          isDisabled={isAtEndDate}
-          colorScheme="blue">
-          Next
-        </Button>
-      </HStack>
+      </Flex>
     </>
   );
 };
