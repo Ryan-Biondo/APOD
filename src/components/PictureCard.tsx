@@ -1,4 +1,11 @@
-import { Box, Card, Image, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Card,
+  Image,
+  Text,
+  useColorMode,
+  useTheme,
+} from '@chakra-ui/react';
 
 interface PictureCardProps {
   title: string;
@@ -11,9 +18,19 @@ interface PictureCardProps {
 
 const PictureCard = (props: PictureCardProps) => {
   const { title, imageUrl, date, explanation, hdUrl, copyright } = props;
+  const { colorMode } = useColorMode();
+  const theme = useTheme();
 
   return (
-    <Card mt="4" py={2}>
+    <Card
+      mt="4"
+      py={2}
+      bg={
+        colorMode === 'dark' ? theme.colors.gray[900] : theme.colors.gray[100]
+      }
+      color={
+        colorMode === 'dark' ? theme.colors.gray[100] : theme.colors.gray[900]
+      }>
       <Box px={2}>
         <Text fontWeight="bold" fontSize="2xl" mb="2">
           {title}
@@ -35,7 +52,12 @@ const PictureCard = (props: PictureCardProps) => {
       <Box px={2}>
         {hdUrl && (
           <Box mt="4">
-            <Text as="a" href={hdUrl} target="_blank" rel="noopener noreferrer">
+            <Text
+              as="a"
+              href={hdUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              textDecoration="underline">
               View in HD
             </Text>
           </Box>

@@ -2,9 +2,9 @@ import {
   Grid,
   Heading,
   VStack,
-  theme,
   useBreakpointValue,
   useColorMode,
+  useTheme,
 } from '@chakra-ui/react';
 import LandingCard from './LandingCard';
 import useApod from '../hooks/useApod';
@@ -21,6 +21,7 @@ interface LandingPageProps {
 const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
   const { data, error, isLoading } = useApod();
   const { colorMode } = useColorMode();
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const handleDateClick = (selectedDate: Date) => {
