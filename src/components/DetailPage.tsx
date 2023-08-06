@@ -3,6 +3,7 @@ import PictureCard from './PictureCard';
 import NavBar from './NavBar';
 import useApodForDate from '../hooks/useApodForDate';
 import { Box } from '@chakra-ui/react';
+import LoadingSpinner from './LoadingSpinner';
 
 interface DetailProps {
   startDate: Date | null;
@@ -15,7 +16,7 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
   if (!date) return <p>Date not provided!</p>;
   const { apodItem, isLoading, error } = useApodForDate(date);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <p>Error: {error}</p>;
 
   return (
