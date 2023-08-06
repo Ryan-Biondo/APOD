@@ -1,15 +1,84 @@
-import { Button } from '@chakra-ui/react';
+import { Button, HStack, theme, useColorMode } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import ThemeToggleButton from './ThemeToggleButton';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import useDateNavigation from '../hooks/useDateNavigation';
+import Calendar from './Calendar';
 
-const NavBar = () => {
+interface NavProps {
+  startDate: Date | null;
+  setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+}
+
+const NavBar = ({ startDate, setStartDate }: NavProps) => {
+  const { colorMode } = useColorMode();
+  const {
+    navigateToPreviousDate,
+    navigateToNextDate,
+    isAtStartDate,
+    isAtEndDate,
+  } = useDateNavigation();
+
+  const handlePreviousClick = () => {
+    const newDate = navigateToPreviousDate();
+    if (newDate) {
+      setStartDate(newDate); // Update the shared state
+    }
+  };
+
+  const handleNextClick = () => {
+    const newDate = navigateToNextDate();
+    if (newDate) {
+      setStartDate(newDate); // Update the shared state
+    }
+  };
+
   return (
-    <nav>
-      <Link to="/">
-        <Button colorScheme="blue" size="md">
-          Home
+    <>
+      <HStack justifyContent={'space-between'} mb={3}>
+        <Link to="/">
+          <Button
+            onClick={() => setStartDate(new Date())}
+            borderWidth={1}
+            bg={
+              colorMode === 'dark'
+                ? theme.colors.gray[900]
+                : theme.colors.gray[100]
+            }
+            color={
+              colorMode === 'dark'
+                ? theme.colors.gray[100]
+                : theme.colors.gray[900]
+            }
+            _hover={{
+              bg:
+                colorMode === 'dark'
+                  ? theme.colors.gray[800]
+                  : theme.colors.gray[200],
+            }}>
+            Home
+          </Button>
+        </Link>
+        <ThemeToggleButton />
+      </HStack>
+      <HStack justifyContent={'space-between'}>
+        <Button
+          onClick={handlePreviousClick}
+          leftIcon={<ChevronLeftIcon />}
+          isDisabled={isAtStartDate}
+          colorScheme="blue">
+          Previous
         </Button>
-      </Link>
-    </nav>
+        <Calendar startDate={startDate} setStartDate={setStartDate} />
+        <Button
+          onClick={handleNextClick}
+          rightIcon={<ChevronRightIcon />}
+          isDisabled={isAtEndDate}
+          colorScheme="blue">
+          Next
+        </Button>
+      </HStack>
+    </>
   );
 };
 

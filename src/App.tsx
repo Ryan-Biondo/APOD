@@ -1,17 +1,45 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import DetailPage from './components/DetailPage';
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider, useColorMode } from '@chakra-ui/react';
+import StarryNight from './components/StarryNight';
+import './App.css';
+import theme from './theme';
+import { useState } from 'react';
 
 const App = () => {
+  const { colorMode } = useColorMode();
+  const [startDate, setStartDate] = useState<Date | null>(new Date()); // Establish the state here
+
   return (
-    <ChakraProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/detail" element={<DetailPage />} />
-        </Routes>
-      </Router>
+    <ChakraProvider theme={theme}>
+      <div className="app-container">
+        <StarryNight />
+        <Box padding={5} bg={theme.colors.background[colorMode]}>
+          <Router>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <LandingPage
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                  />
+                }
+              />
+              <Route
+                path="/details/:date"
+                element={
+                  <DetailPage
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                  />
+                }
+              />
+            </Routes>
+          </Router>
+        </Box>
+      </div>
     </ChakraProvider>
   );
 };
