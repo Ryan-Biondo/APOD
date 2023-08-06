@@ -1,4 +1,4 @@
-import { Button, HStack, theme, useColorMode } from '@chakra-ui/react';
+import { Button, HStack, useColorMode, useTheme } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import ThemeToggleButton from './ThemeToggleButton';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
@@ -12,6 +12,7 @@ interface NavProps {
 
 const NavBar = ({ startDate, setStartDate }: NavProps) => {
   const { colorMode } = useColorMode();
+  const theme = useTheme();
   const {
     navigateToPreviousDate,
     navigateToNextDate,
@@ -22,14 +23,16 @@ const NavBar = ({ startDate, setStartDate }: NavProps) => {
   const handlePreviousClick = () => {
     const newDate = navigateToPreviousDate();
     if (newDate) {
-      setStartDate(newDate); // Update the shared state
+      setStartDate(newDate);
+      console.log('Navigated to:', newDate);
     }
   };
 
   const handleNextClick = () => {
     const newDate = navigateToNextDate();
     if (newDate) {
-      setStartDate(newDate); // Update the shared state
+      setStartDate(newDate);
+      console.log('Navigated to:', newDate);
     }
   };
 

@@ -12,7 +12,6 @@ interface DetailProps {
 
 const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
   const { date } = useParams<{ date: string }>();
-
   if (!date) return <p>Date not provided!</p>;
   const { apodItem, isLoading, error } = useApodForDate(date);
 
