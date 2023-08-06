@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useColorMode, useTheme } from '@chakra-ui/react';
 
-const numStars = 80;
+const numStars = 150;
 
 const StarryNight = () => {
   const container = useRef<HTMLDivElement | null>(null);
@@ -9,12 +9,12 @@ const StarryNight = () => {
   const theme = useTheme();
 
   const starColors = [
-    '#FFDFD3', // soft peach
-    '#D4EFFF', // gentle sky blue
-    '#FFEED4', // light tangerine
-    '#D8FFD4', // pastel green
-    '#FFD4EB', // light pink
-    '#D4DFFF', // pale lilac
+    '#FFDFD3',
+    '#D4EFFF',
+    '#FFEED4',
+    '#D8FFD4',
+    '#FFD4EB',
+    '#D4DFFF',
   ];
 
   const getRandomStarColor = () => {
@@ -23,6 +23,33 @@ const StarryNight = () => {
   };
 
   useEffect(() => {
+    let resizeTimer: any;
+
+    const generateStars = (container: HTMLDivElement) => {
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+
+      for (let i = 0; i < numStars; i++) {
+        createStar(container);
+      }
+      const stars = container.getElementsByClassName('star');
+      for (let i = 0; i < stars.length; i++) {
+        const star = stars[i] as HTMLDivElement;
+        applyRandomTwinkle(star);
+      }
+    };
+
+    // Debouncing effect
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (container.current) {
+          generateStars(container.current);
+        }
+      }, 500);
+    };
+
     const generateRandomPosition = () => {
       const documentWidth = document.documentElement.scrollWidth;
       const documentHeight = document.documentElement.scrollHeight;
@@ -34,10 +61,9 @@ const StarryNight = () => {
     const createStar = (container: HTMLDivElement) => {
       const star = document.createElement('div');
       star.classList.add('star');
-      // Set a random angle between 0 and 360 degrees
       const randomAngle = Math.floor(Math.random() * 360);
       star.style.transform = `rotate(${randomAngle}deg)`;
-      star.style.backgroundColor = getRandomStarColor(); // Updated to use the new random color function
+      star.style.backgroundColor = getRandomStarColor();
       const position = generateRandomPosition();
       star.style.left = `${position.x}px`;
       star.style.top = `${position.y}px`;
@@ -53,23 +79,19 @@ const StarryNight = () => {
     };
 
     if (container.current) {
-      for (let i = 0; i < numStars; i++) {
-        createStar(container.current);
-      }
-      const stars = container.current.getElementsByClassName('star');
-      for (let i = 0; i < stars.length; i++) {
-        const star = stars[i] as HTMLDivElement;
-        applyRandomTwinkle(star);
-      }
+      generateStars(container.current);
     }
 
-    // Cleanup function to remove all stars
+    window.addEventListener('resize', handleResize);
+
     return () => {
       if (container.current) {
         while (container.current.firstChild) {
           container.current.removeChild(container.current.firstChild);
         }
       }
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(resizeTimer);
     };
   }, [colorMode, theme]);
 
