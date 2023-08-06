@@ -13,18 +13,23 @@ const useDateNavigation = () => {
   const navigateToPreviousDate = (): Date | null => {
     if (isAtStartDate) return null;
     const prevDate = new Date(date!);
+    prevDate.setMinutes(prevDate.getMinutes() + prevDate.getTimezoneOffset());
     prevDate.setDate(prevDate.getDate() - 1);
     navigate(`/details/${prevDate.toISOString().split('T')[0]}`);
+    console.log(prevDate + 'from' + date);
     return prevDate;
-  };
+};
 
-  const navigateToNextDate = (): Date | null => {
+const navigateToNextDate = (): Date | null => {
     if (isAtEndDate) return null;
     const nextDate = new Date(date!);
+    nextDate.setMinutes(nextDate.getMinutes() + nextDate.getTimezoneOffset());
     nextDate.setDate(nextDate.getDate() + 1);
     navigate(`/details/${nextDate.toISOString().split('T')[0]}`);
+    console.log(nextDate + 'from' + date);
     return nextDate;
-  };
+};
+
 
   return {
     navigateToPreviousDate,

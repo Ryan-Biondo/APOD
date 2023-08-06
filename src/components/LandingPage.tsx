@@ -11,6 +11,7 @@ import useApod from '../hooks/useApod';
 import ThemeToggleButton from './ThemeToggleButton';
 import Calendar from './Calendar';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
 
 interface LandingPageProps {
   startDate: Date | null;
@@ -23,8 +24,13 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
   const navigate = useNavigate();
 
   const handleDateClick = (selectedDate: Date) => {
-    setStartDate(selectedDate); // Set the shared state
-    navigate(`/details/${selectedDate.toISOString().split('T')[0]}`); // Navigate to details page
+    const adjustedDate = new Date(selectedDate);
+    adjustedDate.setMinutes(
+      adjustedDate.getMinutes() + adjustedDate.getTimezoneOffset()
+    );
+
+    setStartDate(adjustedDate); // Set the shared state
+    navigate(`/details/${adjustedDate.toISOString().split('T')[0]}`); // Navigate to details page
   };
 
   const gridTemplateColumns = useBreakpointValue({
@@ -34,7 +40,7 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
     xl: 'repeat(5, 1fr)',
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <p>Error: {error}</p>;
   const reversedData = [...data].reverse();
 
@@ -53,13 +59,7 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
             colorMode === 'dark'
               ? theme.colors.gray[100]
               : theme.colors.gray[900]
-          }
-          _hover={{
-            bg:
-              colorMode === 'dark'
-                ? theme.colors.gray[800]
-                : theme.colors.gray[200],
-          }}>
+          }>
           Astronomy Picture of the Day Gallery
         </Heading>
         <ThemeToggleButton />

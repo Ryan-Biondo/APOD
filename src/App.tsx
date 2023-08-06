@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 const App = () => {
   const { colorMode } = useColorMode();
-  const [startDate, setStartDate] = useState<Date | null>(new Date()); // Establish the state here
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
 
   return (
     <ChakraProvider theme={theme}>

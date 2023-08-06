@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useColorMode, useTheme } from '@chakra-ui/react';
 
-const numStars = 150;
+const numStars = 80;
 
 const StarryNight = () => {
   const container = useRef<HTMLDivElement | null>(null);
