@@ -11,7 +11,7 @@ const LoadingSpinner = () => {
       height="100vh"
       width="100vw"
       position="relative"
-      right="50px">
+      right="30px">
       <BiPlanet className="rotate-icon" size="200px" fill="#D4B0FF" />
     </Box>
   );
