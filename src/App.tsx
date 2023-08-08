@@ -6,6 +6,7 @@ import StarryNight from './components/StarryNight';
 import './App.css';
 import theme from './theme';
 import { useState } from 'react';
+import Footer from './components/Footer';
 
 const App = () => {
   const { colorMode } = useColorMode();
@@ -15,7 +16,7 @@ const App = () => {
     <ChakraProvider theme={theme}>
       <div className="app-container">
         <StarryNight />
-        <Box padding={'10px 10px 0'} bg={theme.colors.background[colorMode]}>
+        <Box padding={'15px 30px 0'} bg={theme.colors.background[colorMode]}>
           <Router>
             <Routes>
               <Route
@@ -38,6 +39,7 @@ const App = () => {
               />
             </Routes>
           </Router>
+          <Footer />
         </Box>
       </div>
     </ChakraProvider>

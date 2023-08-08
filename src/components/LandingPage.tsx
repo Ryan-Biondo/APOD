@@ -1,6 +1,6 @@
 import {
   Grid,
-  Heading,
+  HStack,
   Link,
   Text,
   VStack,
@@ -14,7 +14,7 @@ import ThemeToggleButton from './ThemeToggleButton';
 import Calendar from './Calendar';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
-import Footer from './Footer';
+import ApodHeading from './ApodHeading';
 
 interface LandingPageProps {
   startDate: Date | null;
@@ -51,21 +51,10 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
   return (
     <>
       <VStack spacing={4} alignItems="start" mb="6">
-        <Heading
-          p={2}
-          borderRadius={'lg'}
-          bg={
-            colorMode === 'dark'
-              ? theme.colors.gray[900]
-              : theme.colors.gray[100]
-          }
-          color={
-            colorMode === 'dark'
-              ? theme.colors.gray[100]
-              : theme.colors.gray[900]
-          }>
-          Astronomy Picture of the Day Gallery
-        </Heading>
+        <HStack justifyContent={'space-between'} w="100%">
+          <ApodHeading />
+          <ThemeToggleButton />
+        </HStack>
         <Text
           width="100%"
           p={2}
@@ -90,17 +79,8 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
           </Link>
           , with updates at 12:00 AM UTC every day! Use the date picker below to
           navigate to a specific date as far back as June 16, 1995.
-          <br />
-          Created by{' '}
-          <Link
-            fontWeight={'bold'}
-            href="https://www.ryanbiondo.com/"
-            target="_blank">
-            Ryan Biondo
-          </Link>
-          .
         </Text>
-        <ThemeToggleButton />
+
         <Calendar startDate={startDate} setStartDate={setStartDate} />
       </VStack>
       <Grid templateColumns={gridTemplateColumns} gap={6}>
@@ -114,7 +94,6 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
           />
         ))}
       </Grid>
-      <Footer />
     </>
   );
 };
