@@ -17,57 +17,30 @@ const StarryNight = () => {
     '#D4DFFF',
   ];
 
-  const getRandomStarColor = () => {
-    const randomIndex = Math.floor(Math.random() * starColors.length);
-    return starColors[randomIndex];
-  };
+  const getRandomStarColor = () =>
+    starColors[Math.floor(Math.random() * starColors.length)];
 
   useEffect(() => {
-    let resizeTimer: any;
-
-    const generateStars = (container: HTMLDivElement) => {
-      while (container.firstChild) {
-        container.removeChild(container.firstChild);
-      }
-
-      for (let i = 0; i < numStars; i++) {
-        createStar(container);
-      }
-      const stars = container.getElementsByClassName('star');
-      for (let i = 0; i < stars.length; i++) {
-        const star = stars[i] as HTMLDivElement;
-        applyRandomTwinkle(star);
-      }
-    };
-
-    // Debouncing effect
-    const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        if (container.current) {
-          generateStars(container.current);
-        }
-      }, 500);
-    };
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const generateRandomPosition = () => {
-      const documentWidth = document.documentElement.scrollWidth;
-      const documentHeight = document.documentElement.scrollHeight;
-      const xPos = Math.floor(Math.random() * documentWidth);
-      const yPos = Math.floor(Math.random() * documentHeight);
-      return { x: xPos, y: yPos };
+      const { scrollWidth, scrollHeight } = document.documentElement;
+      return {
+        x: Math.floor(Math.random() * scrollWidth),
+        y: Math.floor(Math.random() * scrollHeight),
+      };
     };
 
     const createStar = (container: HTMLDivElement) => {
       const star = document.createElement('div');
-      star.classList.add('star');
-      const randomAngle = Math.floor(Math.random() * 360);
-      star.style.transform = `rotate(${randomAngle}deg)`;
+      star.className = 'star';
+      star.style.transform = `rotate(${Math.floor(Math.random() * 360)}deg)`;
       star.style.backgroundColor = getRandomStarColor();
-      const position = generateRandomPosition();
-      star.style.left = `${position.x}px`;
-      star.style.top = `${position.y}px`;
+      const { x, y } = generateRandomPosition();
+      star.style.left = `${x}px`;
+      star.style.top = `${y}px`;
       container.appendChild(star);
+      applyRandomTwinkle(star);
     };
 
     const applyRandomTwinkle = (star: HTMLDivElement) => {
@@ -78,16 +51,31 @@ const StarryNight = () => {
       }, randomInterval);
     };
 
-    if (container.current) {
-      generateStars(container.current);
-    }
+    const generateStars = () => {
+      const containerElement = container.current;
+      if (containerElement) {
+        while (containerElement.firstChild) {
+          containerElement.removeChild(containerElement.firstChild);
+        }
+        Array.from({ length: numStars }).forEach(() =>
+          createStar(containerElement)
+        );
+      }
+    };
 
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(generateStars, 500);
+    };
+
+    generateStars();
     window.addEventListener('resize', handleResize);
 
     return () => {
-      if (container.current) {
-        while (container.current.firstChild) {
-          container.current.removeChild(container.current.firstChild);
+      const containerElement = container.current;
+      if (containerElement) {
+        while (containerElement.firstChild) {
+          containerElement.removeChild(containerElement.firstChild);
         }
       }
       window.removeEventListener('resize', handleResize);
@@ -95,7 +83,7 @@ const StarryNight = () => {
     };
   }, [colorMode, theme]);
 
-  return <div ref={container} id="star-container"></div>;
+  return <div ref={container} id="star-container" />;
 };
 
 export default StarryNight;

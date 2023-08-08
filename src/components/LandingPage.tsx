@@ -8,13 +8,13 @@ import {
   useColorMode,
   useTheme,
 } from '@chakra-ui/react';
-import LandingCard from './LandingCard';
-import useApod from '../hooks/useApod';
-import ThemeToggleButton from './ThemeToggleButton';
-import Calendar from './Calendar';
 import { useNavigate } from 'react-router-dom';
+import useApod from '../hooks/useApod';
 import LoadingSpinner from './LoadingSpinner';
 import ApodHeading from './ApodHeading';
+import ThemeToggleButton from './ThemeToggleButton';
+import Calendar from './Calendar';
+import LandingCard from './LandingCard';
 
 interface LandingPageProps {
   startDate: Date | null;
