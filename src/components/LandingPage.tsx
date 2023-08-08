@@ -34,7 +34,7 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
     );
 
     setStartDate(adjustedDate); // Set the shared state
-    navigate(`/details/${adjustedDate.toISOString().split('T')[0]}`); // Navigate to details page
+    navigate(`/details/${adjustedDate.toISOString().split('T')[0]}`);
   };
 
   const gridTemplateColumns = useBreakpointValue({
