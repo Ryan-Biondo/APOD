@@ -1,5 +1,4 @@
 import {
-  Box,
   Image,
   Text,
   Link as ChakraLink,
@@ -7,6 +6,8 @@ import {
   CardBody,
   useColorMode,
   useTheme,
+  CardFooter,
+  VStack,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
@@ -53,7 +54,9 @@ const LandingCard = ({ imageUrl, title, date, onClick }: CardProps) => {
             width="100%"
             borderTopRadius="lg"
           />
-          <Box my={2} px={3}>
+        </CardBody>
+        <CardFooter>
+          <VStack alignItems="flex-start" spacing={0}>
             <Text fontWeight="semibold" fontSize="lg">
               {title}
             </Text>
@@ -62,8 +65,8 @@ const LandingCard = ({ imageUrl, title, date, onClick }: CardProps) => {
                 {formatDateDisplay(date)}
               </Text>
             )}
-          </Box>
-        </CardBody>
+          </VStack>
+        </CardFooter>
       </Card>
     </ChakraLink>
   );
