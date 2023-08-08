@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <>
       <Card
-        mt="50px"
+        mt="35px"
         borderBottomRadius={0}
         p={2}
         justifyContent="space-between"
@@ -32,7 +32,7 @@ const Footer = () => {
           <Text>
             Created by{' '}
             <Link
-              fontWeight={'bold'}
+              fontStyle="italic"
               href="https://www.ryanbiondo.com/"
               target="_blank">
               Ryan Biondo

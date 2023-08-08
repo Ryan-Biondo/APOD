@@ -1,5 +1,4 @@
 import {
-  Box,
   Card,
   CardBody,
   CardFooter,
@@ -25,8 +24,7 @@ const PictureCard = (props: PictureCardProps) => {
 
   return (
     <Card
-      my={10}
-      py={2}
+      my={4}
       bg={
         colorMode === 'dark' ? theme.colors.gray[900] : theme.colors.gray[100]
       }
@@ -48,21 +46,18 @@ const PictureCard = (props: PictureCardProps) => {
         w="100%"
         objectFit="cover"
         borderRadius="sm"
-        mt="4"
         mx="auto"
       />
-      <CardFooter px={2} justifyContent={'space-between'} alignItems={'end'}>
+      <CardFooter justifyContent={'space-between'} alignItems={'end'}>
         {hdUrl && (
-          <Box mt="4">
-            <Text
-              as="a"
-              href={hdUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              textDecoration="underline">
-              View in HD
-            </Text>
-          </Box>
+          <Text
+            as="a"
+            href={hdUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            textDecoration="underline">
+            View in HD
+          </Text>
         )}
         {copyright && (
           <Text mb={1} fontSize="xs">

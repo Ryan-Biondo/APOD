@@ -11,6 +11,8 @@ const ThemeToggleButton = () => {
       onClick={toggleColorMode}
       aria-label="Toggle theme"
       borderWidth={1}
+      fontSize={{ base: 'xl', md: '2xl' }}
+      p="20px 10px"
       bg={
         colorMode === 'dark' ? theme.colors.gray[900] : theme.colors.gray[100]
       }
