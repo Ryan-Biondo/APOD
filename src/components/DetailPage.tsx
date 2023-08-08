@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
-import PictureCard from './PictureCard';
-import NavBar from './NavBar';
 import useApodForDate from '../hooks/useApodForDate';
 import { Box } from '@chakra-ui/react';
 import LoadingSpinner from './LoadingSpinner';
 import HomeButton from './HomeButton';
+import NavBar from './NavBar';
+import PictureCard from './PictureCard';
 
 interface DetailProps {
   startDate: Date | null;
