@@ -1,6 +1,4 @@
-import { Button, Flex, HStack, useColorMode, useTheme } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import ThemeToggleButton from './ThemeToggleButton';
+import { Button, Flex, HStack } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import useDateNavigation from '../hooks/useDateNavigation';
 import Calendar from './Calendar';
@@ -11,8 +9,6 @@ interface NavProps {
 }
 
 const NavBar = ({ startDate, setStartDate }: NavProps) => {
-  const { colorMode } = useColorMode();
-  const theme = useTheme();
   const {
     navigateToPreviousDate,
     navigateToNextDate,
@@ -38,33 +34,6 @@ const NavBar = ({ startDate, setStartDate }: NavProps) => {
 
   return (
     <>
-      <HStack justifyContent={'space-between'} mb={3}>
-        <Link to="/">
-          <Button
-            onClick={() => setStartDate(new Date())}
-            borderWidth={1}
-            bg={
-              colorMode === 'dark'
-                ? theme.colors.gray[900]
-                : theme.colors.gray[100]
-            }
-            color={
-              colorMode === 'dark'
-                ? theme.colors.gray[100]
-                : theme.colors.gray[900]
-            }
-            _hover={{
-              bg:
-                colorMode === 'dark'
-                  ? theme.colors.gray[800]
-                  : theme.colors.gray[200],
-            }}>
-            Home
-          </Button>
-        </Link>
-        <ThemeToggleButton />
-      </HStack>
-
       <Flex
         direction={['column', 'column', 'row']} // Switch direction based on breakpoints
         justifyContent={'space-between'}

@@ -15,7 +15,7 @@ const App = () => {
     <ChakraProvider theme={theme}>
       <div className="app-container">
         <StarryNight />
-        <Box padding={5} bg={theme.colors.background[colorMode]}>
+        <Box padding={'10px 10px 0'} bg={theme.colors.background[colorMode]}>
           <Router>
             <Routes>
               <Route

@@ -1,6 +1,8 @@
 import {
   Grid,
   Heading,
+  Link,
+  Text,
   VStack,
   useBreakpointValue,
   useColorMode,
@@ -12,6 +14,7 @@ import ThemeToggleButton from './ThemeToggleButton';
 import Calendar from './Calendar';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
+import Footer from './Footer';
 
 interface LandingPageProps {
   startDate: Date | null;
@@ -63,6 +66,40 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
           }>
           Astronomy Picture of the Day Gallery
         </Heading>
+        <Text
+          width="100%"
+          p={2}
+          borderRadius={'lg'}
+          bg={
+            colorMode === 'dark'
+              ? theme.colors.gray[900]
+              : theme.colors.gray[100]
+          }
+          color={
+            colorMode === 'dark'
+              ? theme.colors.gray[100]
+              : theme.colors.gray[900]
+          }>
+          Explore the collection of astronomy pictures sourced from{' '}
+          <Link
+            href="https://apod.nasa.gov/apod/"
+            target="_blank"
+            textDecoration="underline"
+            color="teal.500">
+            NASA
+          </Link>
+          , with updates at 12:00 AM UTC every day! Use the date picker below to
+          navigate to a specific date as far back as June 16, 1995.
+          <br />
+          Created by{' '}
+          <Link
+            fontWeight={'bold'}
+            href="https://www.ryanbiondo.com/"
+            target="_blank">
+            Ryan Biondo
+          </Link>
+          .
+        </Text>
         <ThemeToggleButton />
         <Calendar startDate={startDate} setStartDate={setStartDate} />
       </VStack>
@@ -77,6 +114,7 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
           />
         ))}
       </Grid>
+      <Footer />
     </>
   );
 };

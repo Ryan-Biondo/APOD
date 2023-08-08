@@ -1,6 +1,8 @@
 import {
   Box,
   Card,
+  CardBody,
+  CardFooter,
   Image,
   Text,
   useColorMode,
@@ -23,7 +25,7 @@ const PictureCard = (props: PictureCardProps) => {
 
   return (
     <Card
-      mt="4"
+      my={10}
       py={2}
       bg={
         colorMode === 'dark' ? theme.colors.gray[900] : theme.colors.gray[100]
@@ -31,7 +33,7 @@ const PictureCard = (props: PictureCardProps) => {
       color={
         colorMode === 'dark' ? theme.colors.gray[100] : theme.colors.gray[900]
       }>
-      <Box px={2}>
+      <CardBody px={2}>
         <Text fontWeight="bold" fontSize="2xl" mb="2">
           {title}
         </Text>
@@ -39,7 +41,7 @@ const PictureCard = (props: PictureCardProps) => {
           Date: {date}
         </Text>
         <Text>{explanation}</Text>
-      </Box>
+      </CardBody>
       <Image
         src={imageUrl}
         alt={title}
@@ -49,7 +51,7 @@ const PictureCard = (props: PictureCardProps) => {
         mt="4"
         mx="auto"
       />
-      <Box px={2}>
+      <CardFooter px={2} justifyContent={'space-between'} alignItems={'end'}>
         {hdUrl && (
           <Box mt="4">
             <Text
@@ -63,11 +65,11 @@ const PictureCard = (props: PictureCardProps) => {
           </Box>
         )}
         {copyright && (
-          <Box mt="2" fontSize="xs">
+          <Text mb={1} fontSize="xs">
             Copyright: {copyright}
-          </Box>
+          </Text>
         )}
-      </Box>
+      </CardFooter>
     </Card>
   );
 };

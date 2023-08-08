@@ -1,4 +1,4 @@
-import { Box, HStack, Text, useColorMode, useTheme } from '@chakra-ui/react';
+import { HStack, Text, useColorMode, useTheme } from '@chakra-ui/react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
@@ -25,25 +25,23 @@ const Calendar = ({ startDate, setStartDate }: CalendarProps) => {
       p={2}
       borderRadius={'lg'}>
       <Text>Date:</Text>
-      <Box borderWidth={1}>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => {
-            if (date) {
-              setStartDate(date);
-              const formattedDate = formatDate(date);
-              navigate(`/details/${formattedDate}`);
-            }
-          }}
-          minDate={new Date('1995-06-17')}
-          maxDate={new Date()}
-          showYearDropdown={true}
-          scrollableYearDropdown={true}
-          yearDropdownItemNumber={30}
-          dateFormat="MM-dd-yyyy"
-          className="datepicker"
-        />
-      </Box>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => {
+          if (date) {
+            setStartDate(date);
+            const formattedDate = formatDate(date);
+            navigate(`/details/${formattedDate}`);
+          }
+        }}
+        minDate={new Date('1995-06-17')}
+        maxDate={new Date()}
+        showYearDropdown={true}
+        scrollableYearDropdown={true}
+        yearDropdownItemNumber={30}
+        dateFormat="MM-dd-yyyy"
+        className="datepicker"
+      />
     </HStack>
   );
 };
