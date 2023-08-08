@@ -9,7 +9,7 @@ const config: ThemeConfig = {
 const theme = extendTheme({ config,
   colors: {
     gray: {
-      50: '#f9f9f9',
+      50: '#f0f0f0',
       100: '#f5f0fc',
       200: '#e4dfeb',
       300: '#b3b3b3',
@@ -30,7 +30,7 @@ const theme = extendTheme({ config,
     global: (props: { colorMode: string; }) => ({
       body: {
         bg: props.colorMode === 'dark' ? 'background.dark' : 'background.light',
-        color: props.colorMode === 'dark' ? 'gray.100' : 'gray.900'
+        color: props.colorMode === 'dark' ? 'gray.50' : 'gray.900'
       }
     })
   }

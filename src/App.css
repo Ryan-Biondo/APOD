@@ -54,6 +54,7 @@ body {
     animation: rotate 2s linear infinite; /* adjust 2s for faster/slower rotation */
 }
 .datepicker {
-    width: 105px;
+    width: 155px;
+    margin: 0 auto;
     padding: 0 10px;
 }

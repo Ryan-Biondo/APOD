@@ -4,6 +4,8 @@ import NavBar from './NavBar';
 import useApodForDate from '../hooks/useApodForDate';
 import { Box } from '@chakra-ui/react';
 import LoadingSpinner from './LoadingSpinner';
+import HomeButton from './HomeButton';
+import Footer from './Footer';
 
 interface DetailProps {
   startDate: Date | null;
@@ -20,6 +22,7 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
 
   return (
     <Box maxW="900px" mx="auto">
+      <HomeButton setStartDate={setStartDate} />
       <NavBar startDate={startDate} setStartDate={setStartDate} />
       <PictureCard
         title={apodItem!.title}
@@ -29,6 +32,10 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
         hdUrl={apodItem!.hdurl}
         copyright={apodItem!.copyright}
       />
+      <Box mt={2}>
+        <NavBar startDate={startDate} setStartDate={setStartDate} />
+      </Box>
+      <Footer />
     </Box>
   );
 };
