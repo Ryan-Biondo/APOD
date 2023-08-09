@@ -56,12 +56,12 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
           <ThemeToggleButton />
         </HStack>
         <Text
-          width="100%"
+          width="fit-content"
           p={2}
           borderRadius={'lg'}
           bg={
             colorMode === 'dark'
-              ? theme.colors.gray[900]
+              ? theme.colors.gray[800]
               : theme.colors.gray[100]
           }
           color={
@@ -83,6 +83,7 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
 
         <Calendar startDate={startDate} setStartDate={setStartDate} />
       </VStack>
+
       <Grid templateColumns={gridTemplateColumns} gap={6}>
         {reversedData.map((item) => (
           <LandingCard

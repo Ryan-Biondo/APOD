@@ -14,6 +14,7 @@ const HomeButton = ({ setStartDate }: Props) => {
       <HStack justifyContent={'space-between'} mb={3}>
         <Link to="/">
           <Button
+            size="lg"
             onClick={() => setStartDate(new Date())}
             borderWidth={1}
             bg={

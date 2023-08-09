@@ -48,7 +48,11 @@ const PictureCard = (props: PictureCardProps) => {
         borderRadius="sm"
         mx="auto"
       />
-      <CardFooter justifyContent={'space-between'} alignItems={'end'}>
+      <CardFooter
+        justifyContent="space-between"
+        alignItems="end"
+        flexDirection={{ base: 'column', sm: 'row' }}
+        gap={3}>
         {hdUrl && (
           <Text
             as="a"
