@@ -1,22 +1,21 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
-import DetailPage from './components/DetailPage';
-import { Box, ChakraProvider, useColorMode } from '@chakra-ui/react';
-import StarryNight from './components/StarryNight';
-import './App.css';
-import theme from './theme';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import { useState } from 'react';
+import DetailPage from './components/DetailPage';
+import LandingPage from './components/LandingPage';
+import StarryNight from './components/StarryNight';
 import Footer from './components/Footer';
+import theme from './theme';
+import './App.css';
 
 const App = () => {
-  const { colorMode } = useColorMode();
   const [startDate, setStartDate] = useState<Date | null>(new Date());
 
   return (
     <ChakraProvider theme={theme}>
       <div className="app-container">
         <StarryNight />
-        <Box padding={'15px 30px 0'} bg={theme.colors.background[colorMode]}>
+        <Box padding={'15px 30px 0'}>
           <Router>
             <Routes>
               <Route
