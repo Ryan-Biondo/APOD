@@ -37,21 +37,24 @@ const NavBar = ({ startDate, setStartDate }: NavProps) => {
       <Flex
         direction={['column', 'column', 'row']} // Switch direction based on breakpoints
         justifyContent={'space-between'}
-        alignItems={['start', 'start', 'center']} // Adjust alignment for column layout
-        gap={3}>
+        alignItems={'center'} // Adjust alignment for column layout
+        gap={3}
+        mt={12}>
         <HStack spacing={3}>
           <Button
             onClick={handlePreviousClick}
             leftIcon={<ChevronLeftIcon />}
             isDisabled={isAtStartDate}
-            colorScheme="blue">
+            colorScheme="blue"
+            size={{ base: 'md', sm: 'lg' }}>
             Previous
           </Button>
           <Button
             onClick={handleNextClick}
             rightIcon={<ChevronRightIcon />}
             isDisabled={isAtEndDate}
-            colorScheme="blue">
+            colorScheme="blue"
+            size={{ base: 'md', sm: 'lg' }}>
             Next
           </Button>
         </HStack>

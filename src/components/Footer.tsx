@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   Icon,
   Link,
@@ -7,6 +8,7 @@ import {
   useTheme,
 } from '@chakra-ui/react';
 import { BiPlanet } from 'react-icons/bi';
+import BackToTop from './BackToTop';
 
 const Footer = () => {
   const { colorMode } = useColorMode();
@@ -14,6 +16,7 @@ const Footer = () => {
 
   return (
     <>
+      <BackToTop />
       <Card
         mt="35px"
         borderBottomRadius={0}
@@ -21,14 +24,14 @@ const Footer = () => {
         justifyContent="space-between"
         alignItems="center"
         flexDirection="row"
-        gap={3}
+        gap={6}
         bg={
           colorMode === 'dark' ? theme.colors.gray[900] : theme.colors.gray[100]
         }
         color={
           colorMode === 'dark' ? theme.colors.gray[100] : theme.colors.gray[900]
         }>
-        <div>
+        <Box letterSpacing={0.5}>
           <Text>
             Created by{' '}
             <Link
@@ -48,7 +51,7 @@ const Footer = () => {
               ryanbiondo.com
             </Link>
           </Text>
-        </div>
+        </Box>
         <Icon
           as={BiPlanet}
           ml={2}

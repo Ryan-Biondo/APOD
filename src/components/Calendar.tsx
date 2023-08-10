@@ -17,7 +17,7 @@ const Calendar = ({ startDate, setStartDate }: CalendarProps) => {
   return (
     <HStack
       bg={
-        colorMode === 'dark' ? theme.colors.gray[900] : theme.colors.gray[100]
+        colorMode === 'dark' ? theme.colors.gray[800] : theme.colors.gray[100]
       }
       color={
         colorMode === 'dark' ? theme.colors.gray[100] : theme.colors.gray[900]
