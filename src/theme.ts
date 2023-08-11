@@ -10,7 +10,7 @@ const theme = extendTheme({ config,
   colors: {
     gray: {
       50: '#f0f0f0',
-      100: '#f5f0fc',
+      100: '#F0F2FF',
       200: '#e4dfeb',
       300: '#b3b3b3',
       400: '#a0a0a0',

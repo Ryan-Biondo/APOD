@@ -22,7 +22,8 @@ const formatDate = (date: Date): string =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
 const useApod = () => {
-  const endDate = new Date();
+  const currentDate = new Date();
+  const endDate = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 1));
   const startDate = new Date(endDate.getTime() - (19 * 24 * 60 * 60 * 1000)); // 19 days ago in milliseconds
 
   const url = `apod?api_key=${API_KEY}&start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}`; 
