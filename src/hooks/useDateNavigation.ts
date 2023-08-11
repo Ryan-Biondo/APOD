@@ -4,7 +4,7 @@ const useDateNavigation = () => {
   const navigate = useNavigate();
   const { date } = useParams<{ date: string }>();
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate() - 1)).toISOString().split('T')[0];
   const earliestDate = '1995-06-16';
 
   const isAtStartDate = date === earliestDate;
@@ -18,9 +18,9 @@ const useDateNavigation = () => {
     navigate(`/details/${prevDate.toISOString().split('T')[0]}`);
     console.log(prevDate + 'from' + date);
     return prevDate;
-};
+  };
 
-const navigateToNextDate = (): Date | null => {
+  const navigateToNextDate = (): Date | null => {
     if (isAtEndDate) return null;
     const nextDate = new Date(date!);
     nextDate.setMinutes(nextDate.getMinutes() + nextDate.getTimezoneOffset());
@@ -28,8 +28,7 @@ const navigateToNextDate = (): Date | null => {
     navigate(`/details/${nextDate.toISOString().split('T')[0]}`);
     console.log(nextDate + 'from' + date);
     return nextDate;
-};
-
+  };
 
   return {
     navigateToPreviousDate,
