@@ -5,6 +5,7 @@ import { Box, Text } from '@chakra-ui/react';
 import HomeButton from './HomeButton';
 import NavBar from './NavBar';
 import PictureCard from './PictureCard';
+import Footer from './Footer';
 
 interface DetailProps {
   startDate: Date | null;
@@ -43,6 +44,7 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
       />
       <Box mt={2}>
         <NavBar startDate={startDate} setStartDate={setStartDate} />
+        <Footer />
       </Box>
     </Box>
   );
