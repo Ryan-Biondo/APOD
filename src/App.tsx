@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Box, ChakraProvider } from '@chakra-ui/react';
 import { useState } from 'react';
-import DetailPage from './components/DetailPage';
+import DetailPage from './components/DetailsPage';
 import LandingPage from './components/LandingPage';
 import StarryNight from './components/StarryNight';
 import theme from './theme';
