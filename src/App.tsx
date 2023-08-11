@@ -13,7 +13,7 @@ const App = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <div className="app-container">
+      <Box className="app-container">
         <StarryNight />
         <Box padding={'15px 30px 0'}>
           <Router>
@@ -40,7 +40,7 @@ const App = () => {
           </Router>
           <Footer />
         </Box>
-      </div>
+      </Box>
     </ChakraProvider>
   );
 };
