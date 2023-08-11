@@ -17,7 +17,6 @@ const useDateNavigation = () => {
       prevDate.setMinutes(prevDate.getMinutes() + prevDate.getTimezoneOffset());
       prevDate.setDate(prevDate.getDate() - 1);
       navigate(`/details/${prevDate.toISOString().split('T')[0]}`);
-      console.log(prevDate + ' from ' + date);
       return prevDate;
     }
     return null;
@@ -30,7 +29,6 @@ const useDateNavigation = () => {
       nextDate.setMinutes(nextDate.getMinutes() + nextDate.getTimezoneOffset());
       nextDate.setDate(nextDate.getDate() + 1);
       navigate(`/details/${nextDate.toISOString().split('T')[0]}`);
-      console.log(nextDate + ' from ' + date);
       return nextDate;
     }
     return null;
