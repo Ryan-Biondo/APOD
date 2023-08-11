@@ -1,6 +1,7 @@
 import {
   Box,
   Card,
+  Flex,
   Icon,
   Link,
   Text,
@@ -15,7 +16,7 @@ const Footer = () => {
   const theme = useTheme();
 
   return (
-    <>
+    <Flex flexDir="column" as="footer" justifyContent={'end'}>
       <BackToTop />
       <Card
         mt="35px"
@@ -61,7 +62,7 @@ const Footer = () => {
           display={{ base: 'none', sm: 'block' }}
         />
       </Card>
-    </>
+    </Flex>
   );
 };
 

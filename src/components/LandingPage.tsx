@@ -15,6 +15,7 @@ import ApodHeading from './ApodHeading';
 import ThemeToggleButton from './ThemeToggleButton';
 import Calendar from './Calendar';
 import LandingCard from './LandingCard';
+import Footer from './Footer';
 
 interface LandingPageProps {
   startDate: Date | null;
@@ -95,6 +96,7 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
           />
         ))}
       </Grid>
+      <Footer />
     </>
   );
 };

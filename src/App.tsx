@@ -4,7 +4,6 @@ import { useState } from 'react';
 import DetailPage from './components/DetailPage';
 import LandingPage from './components/LandingPage';
 import StarryNight from './components/StarryNight';
-import Footer from './components/Footer';
 import theme from './theme';
 import './App.css';
 
@@ -38,7 +37,6 @@ const App = () => {
               />
             </Routes>
           </Router>
-          <Footer />
         </Box>
       </Box>
     </ChakraProvider>
