@@ -20,7 +20,6 @@ const NavBar = ({ startDate, setStartDate }: NavProps) => {
     const newDate = navigateToPreviousDate();
     if (newDate) {
       setStartDate(newDate);
-      console.log('Navigated to:', newDate);
     }
   };
 
@@ -28,7 +27,6 @@ const NavBar = ({ startDate, setStartDate }: NavProps) => {
     const newDate = navigateToNextDate();
     if (newDate) {
       setStartDate(newDate);
-      console.log('Navigated to:', newDate);
     }
   };
 
