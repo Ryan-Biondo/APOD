@@ -23,7 +23,7 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
       <Box>
         <HomeButton setStartDate={setStartDate} />
         <NavBar startDate={startDate} setStartDate={setStartDate} />
-        <Text fontWeight="bold" mt={12} h={'100%'} textAlign="center">
+        <Text fontWeight="bold" mt={18} h={'100%'} textAlign="center">
           Oops! This page is missing! 🤷‍♂️
         </Text>
       </Box>
