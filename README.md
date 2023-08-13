@@ -24,6 +24,9 @@ AstroPix Gallery leverages the power of React to present an immersive gallery of
 - Smooth navigation through pictures by date
 - Responsive design for optimal viewing on various devices
 - User-friendly date picker for specific day selection
+- Light and Dark color themes
+- Loading spinner for seamless UX
+- Back to Top and Home buttons for easy navigation
 
 ## Project Structure
 
