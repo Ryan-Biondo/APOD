@@ -24,6 +24,9 @@ AstroPix Gallery leverages the power of React to present an immersive gallery of
 - Smooth navigation through pictures by date
 - Responsive design for optimal viewing on various devices
 - User-friendly date picker for specific day selection
+- Light and Dark color themes
+- Loading spinner for seamless UX
+- Back to Top and Home buttons for easy navigation
 
 ## Project Structure
 
@@ -91,7 +94,7 @@ NASA-API
 
 ## Development Process
 
-Building AstroPix Gallery involved leveraging React's capabilities to fetch and display APOD images. Challenges included handling date navigation, creating a user-friendly calendar, and implementing responsive design for optimal performance across devices. The process included thorough testing, debugging, and incorporating user-friendly features.
+Building AstroPix Gallery involved fetching and displaying the APOD images. Challenges included handling date navigation, creating a user-friendly calendar, and implementing responsive design for optimal performance across devices. The process included thorough testing, debugging, and incorporating user-friendly features.
 
 ## Future Enhancements
 
