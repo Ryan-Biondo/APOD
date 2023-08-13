@@ -94,7 +94,7 @@ NASA-API
 
 ## Development Process
 
-Building AstroPix Gallery involved leveraging React's capabilities to fetch and display APOD images. Challenges included handling date navigation, creating a user-friendly calendar, and implementing responsive design for optimal performance across devices. The process included thorough testing, debugging, and incorporating user-friendly features.
+Building AstroPix Gallery involved fetching and displaying the APOD images. Challenges included handling date navigation, creating a user-friendly calendar, and implementing responsive design for optimal performance across devices. The process included thorough testing, debugging, and incorporating user-friendly features.
 
 ## Future Enhancements
 
