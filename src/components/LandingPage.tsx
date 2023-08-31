@@ -1,13 +1,17 @@
 import {
+  Box,
   Grid,
   HStack,
   Link,
+  Spinner,
   Text,
   VStack,
   useBreakpointValue,
   useColorMode,
   useTheme,
 } from '@chakra-ui/react';
+import React from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
 import useApod from '../hooks/useApod';
 import ApodHeading from './ApodHeading';
@@ -23,10 +27,19 @@ interface LandingPageProps {
 }
 
 const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
-  const { data, error, isLoading } = useApod();
+  const { data, error, isLoading, fetchNextPage, hasNextPage } = useApod();
   const { colorMode } = useColorMode();
   const theme = useTheme();
   const navigate = useNavigate();
+  const allData = React.useMemo(() => {
+    return (
+      data?.pages
+        .flatMap((page) => page)
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        ) || []
+    );
+  }, [data]);
 
   const handleDateClick = (selectedDate: Date) => {
     const adjustedDate = new Date(selectedDate);
@@ -53,8 +66,6 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
   if (!data) {
     return <p>No data available.</p>;
   }
-
-  const reversedData = [...data].reverse();
 
   return (
     <>
@@ -87,22 +98,43 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
           </Link>
           , with updates at 12:00 AM UTC every day! Use the date picker below to
           navigate to a specific date as far back as June 16, 1995.
+          <br />
+          Created by{' '}
+          <Link
+            fontStyle="italic"
+            href="https://www.ryanbiondo.com/"
+            target="_blank">
+            Ryan Biondo.{' '}
+          </Link>
         </Text>
 
         <Calendar startDate={startDate} setStartDate={setStartDate} />
       </VStack>
-
-      <Grid templateColumns={gridTemplateColumns} gap={6}>
-        {reversedData.map((item) => (
-          <LandingCard
-            key={item.date}
-            date={item.date}
-            imageUrl={item.url}
-            title={item.title}
-            onClick={() => handleDateClick(new Date(item.date))}
-          />
-        ))}
-      </Grid>
+      <InfiniteScroll
+        dataLength={allData.length}
+        next={fetchNextPage}
+        hasMore={hasNextPage ?? false}
+        loader={
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            my={5}>
+            <Spinner />
+          </Box>
+        }>
+        <Grid templateColumns={gridTemplateColumns} gap={6}>
+          {allData.map((item) => (
+            <LandingCard
+              key={item.date}
+              date={item.date}
+              imageUrl={item.url}
+              title={item.title}
+              onClick={() => handleDateClick(new Date(item.date))}
+            />
+          ))}
+        </Grid>
+      </InfiniteScroll>
       <Footer />
     </>
   );

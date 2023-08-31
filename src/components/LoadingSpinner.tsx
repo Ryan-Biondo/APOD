@@ -9,7 +9,7 @@ const LoadingSpinner = () => {
       justifyContent="center"
       alignItems="center"
       height="100vh"
-      width="100vw"
+      width="100%"
       position="relative"
       right="30px">
       <BiPlanet className="rotate-icon" size="200px" fill="#D4B0FF" />

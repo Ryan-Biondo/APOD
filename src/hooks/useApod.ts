@@ -1,24 +1,33 @@
-import { useQuery } from 'react-query';
-import { ApodResponse } from '../entities/Data';
+import { useInfiniteQuery } from 'react-query';
 import axios, { API_KEY } from '../services/api-client';
 
 const formatDate = (date: Date): string => 
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
-const useApod = () => {
-  const currentDate = new Date();
-  const endDate = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 1));
-  const startDate = new Date(endDate.getTime() - (20 * 24 * 60 * 60 * 1000)); // 20 days ago in milliseconds
+  const useApod = () => {
+    return useInfiniteQuery(
+      'apod',
+      async ({ pageParam = new Date() }) => {
+        const endDate = new Date(pageParam);
+        const startDate = new Date(endDate.getTime() - (19 * 24 * 60 * 60 * 1000)); // 19 days ago
+        const url = `apod?start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}&api_key=${API_KEY}`;
+        const { data } = await axios.get(url);
+        return data;
+      },
+      {
+        getNextPageParam: (_lastPage, allPages) => {
+          const allDates = new Date(allPages[allPages.length - 1][0]?.date);
+          
+          if (allDates <= new Date('1995-06-16')) {
+            return undefined; 
+          }
+          
+          return new Date(allDates.getTime());
+        },
+      }
+    );
+  };
+  
 
-  const url = `apod?start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}`;
-
-  return useQuery<ApodResponse>(
-    ['apod', API_KEY, startDate, endDate],
-    async () => {
-      const { data } = await axios.get(url);
-      return data;
-    }
-  );
-};
 
 export default useApod;
