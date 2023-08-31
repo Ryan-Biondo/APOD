@@ -15,14 +15,14 @@ const formatDate = (date: Date): string =>
         return data;
       },
       {
-        getNextPageParam: (lastPage, allPages) => {
-          const lastDate = new Date(allPages[allPages.length - 1][0]?.date);
+        getNextPageParam: (_lastPage, allPages) => {
+          const allDates = new Date(allPages[allPages.length - 1][0]?.date);
           
-          if (lastDate <= new Date('1995-06-16')) {
+          if (allDates <= new Date('1995-06-16')) {
             return undefined; 
           }
           
-          return new Date(lastDate.getTime());
+          return new Date(allDates.getTime());
         },
       }
     );
