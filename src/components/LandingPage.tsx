@@ -10,12 +10,12 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import useApod from '../hooks/useApod';
-import LoadingSpinner from './LoadingSpinner';
 import ApodHeading from './ApodHeading';
-import ThemeToggleButton from './ThemeToggleButton';
 import Calendar from './Calendar';
-import LandingCard from './LandingCard';
 import Footer from './Footer';
+import LandingCard from './LandingCard';
+import LoadingSpinner from './LoadingSpinner';
+import ThemeToggleButton from './ThemeToggleButton';
 
 interface LandingPageProps {
   startDate: Date | null;
@@ -46,7 +46,14 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
   });
 
   if (isLoading) return <LoadingSpinner />;
-  if (error) return <p>Error: {error}</p>;
+  if (error instanceof Error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  if (!data) {
+    return <p>No data available.</p>;
+  }
+
   const reversedData = [...data].reverse();
 
   return (

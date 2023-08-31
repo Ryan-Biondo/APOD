@@ -6,6 +6,7 @@ import HomeButton from './HomeButton';
 import NavBar from './NavBar';
 import PictureCard from './PictureCard';
 import Footer from './Footer';
+import LoadingSpinner from './LoadingSpinner';
 
 interface DetailProps {
   startDate: Date | null;
@@ -16,9 +17,31 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
   const { date } = useParams<{ date: string }>();
   if (!date) return <p>Date not provided!</p>;
 
-  const { apodItem, error } = useApodForDate(date);
+  const { data: apodItem, isLoading, error } = useApodForDate(date);
 
-  if (error || !apodItem) {
+  if (isLoading) {
+    return (
+      <>
+        <HomeButton setStartDate={setStartDate} />
+        <NavBar startDate={startDate} setStartDate={setStartDate} />
+        <LoadingSpinner />;
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box>
+        <HomeButton setStartDate={setStartDate} />
+        <NavBar startDate={startDate} setStartDate={setStartDate} />
+        <Text fontWeight="bold" mt={18} h={'100%'} textAlign="center">
+          Oops! An error occurred! 🤷‍♂️
+        </Text>
+      </Box>
+    );
+  }
+
+  if (!apodItem) {
     return (
       <Box>
         <HomeButton setStartDate={setStartDate} />
