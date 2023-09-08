@@ -19,6 +19,8 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
 
   const { data: apodItem, isLoading, error } = useApodForDate(date);
 
+  const actualApodItem = Array.isArray(apodItem) ? apodItem[0] : apodItem;
+
   if (isLoading) {
     return (
       <>
@@ -41,7 +43,7 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
     );
   }
 
-  if (!apodItem) {
+  if (!actualApodItem) {
     return (
       <Box>
         <HomeButton setStartDate={setStartDate} />
@@ -58,12 +60,12 @@ const DetailsPage = ({ startDate, setStartDate }: DetailProps) => {
       <HomeButton setStartDate={setStartDate} />
       <NavBar startDate={startDate} setStartDate={setStartDate} />
       <PictureCard
-        title={apodItem.title}
-        imageUrl={apodItem.url}
-        date={apodItem.date}
-        explanation={apodItem.explanation}
-        hdUrl={apodItem.hdurl}
-        copyright={apodItem.copyright}
+        title={actualApodItem.title}
+        imageUrl={actualApodItem.url}
+        date={actualApodItem.date}
+        explanation={actualApodItem.explanation}
+        hdUrl={actualApodItem.hdurl}
+        copyright={actualApodItem.copyright}
       />
       <Box mt={2}>
         <NavBar startDate={startDate} setStartDate={setStartDate} />

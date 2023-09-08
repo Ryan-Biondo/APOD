@@ -1,10 +1,8 @@
 import axios from "axios";
 
-export const API_KEY = "vGWHa3llbktn0ix8JEVANfGezWD4i3FtZBc6illA";
-
-export default axios.create({
-    baseURL: "https://api.nasa.gov/planetary/",
-    params: {
-        api_key: API_KEY
-    }
+// Create an Axios instance to communicate with your Node.js server
+const apiClient = axios.create({
+  baseURL: "https://apod-server.onrender.com", // your Node.js server URL
 });
+
+export default apiClient;
