@@ -4,7 +4,7 @@ function TypingLoader() {
   const fullText = [
     'Please wait a moment...',
     'Launching you to space...',
-    'Set phasers to stun...',
+    'Setting phasers to stun...',
     'Engage!',
   ];
   const [textIndex, setTextIndex] = useState(0);
