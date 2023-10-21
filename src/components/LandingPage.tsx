@@ -20,6 +20,7 @@ import Footer from './Footer';
 import LandingCard from './LandingCard';
 import LoadingSpinner from './LoadingSpinner';
 import ThemeToggleButton from './ThemeToggleButton';
+import TypingLoader from './TypingLoader';
 
 interface LandingPageProps {
   startDate: Date | null;
@@ -58,7 +59,15 @@ const LandingPage = ({ startDate, setStartDate }: LandingPageProps) => {
     xl: 'repeat(5, 1fr)',
   });
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) {
+    return (
+      <div className="loader-container">
+        <TypingLoader />
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   if (error instanceof Error) {
     return <p>Error: {error.message}</p>;
   }
