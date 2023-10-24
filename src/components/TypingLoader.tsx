@@ -4,6 +4,7 @@ function TypingLoader() {
   const fullText = [
     'Please wait a moment...',
     'Launching you to space...',
+    'Engaging warp drive...',
     'Setting phasers to stun...',
   ];
   const [textIndex, setTextIndex] = useState(0);
@@ -29,7 +30,7 @@ function TypingLoader() {
           setTextIndex((prevTextIndex) => prevTextIndex + 1);
           setTextDisplay((prevTextDisplay) => prevTextDisplay + '\n'); // Start a new line
           setCharIndex(0);
-        }, 3000);
+        }, 3500);
 
         return () => {
           clearTimeout(linePause);
