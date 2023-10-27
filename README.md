@@ -4,7 +4,7 @@ The AstroPix Gallery is a React application that fetches astronomy pictures sour
 
 ## Project Overview
 
-AstroPix Gallery leverages the power of React to present an immersive gallery of astronomy pictures. NASA updates the data everyday at midnight (UTC). Users can seamlessly navigate through the collection, exploring pictures from different dates. The date picker allows specific date selection, while navigation buttons help nearby browsing. The gallery is responsive, providing sufficient viewing on various devices.
+Uses React to present a gallery of astronomy pictures. NASA updates the data everyday at midnight (UTC). Users can navigate through the collection, exploring pictures from different dates. The date picker allows specific date selection, while navigation buttons help nearby browsing. The gallery is responsive, providing sufficient viewing on various devices.
 
 ## Demo
 
